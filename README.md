@@ -90,6 +90,19 @@ Note: token need to be passed as Authorization in Headers for getting all posts.
         },
 
 ##
+## for getting one post
+
+get method: </br>
+
+endpoint: https://restful-api-for-simple-blog-platform.onrender.com/posts/:postid
+
+Note: token need to be passed as Authorization in Headers for getting all posts and also postId need to passed in Params.
+
+        headers: {
+          authorization: `bearer ${token}`,
+        },
+
+##
 ## for creating new post
 
 post method: </br>

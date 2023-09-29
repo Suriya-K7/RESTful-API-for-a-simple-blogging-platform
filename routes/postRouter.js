@@ -13,6 +13,7 @@ const {
   getAllPosts,
   editPost,
   deletePost,
+  getOnePost,
 } = require("../controllers/postController");
 
 /***********Creating new post ***********************/
@@ -22,6 +23,10 @@ postRouter.post("/posts", verifyToken, createPost);
 /***********getting all post ************************/
 
 postRouter.get("/posts", verifyToken, getAllPosts);
+
+/***********getting one post ************************/
+
+postRouter.get("/posts/:postid", verifyToken, getOnePost);
 
 /***********editing user post ************************/
 

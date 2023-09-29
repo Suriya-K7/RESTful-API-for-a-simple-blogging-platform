@@ -20,6 +20,8 @@ app.use(cors());
 //configure mongodb
 mongoose.set("strictQuery", false);
 
+mongoose.set("strictPopulate", false);
+
 mongoose
   .connect(URL)
   .then(() => {

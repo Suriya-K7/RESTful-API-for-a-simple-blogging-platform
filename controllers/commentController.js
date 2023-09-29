@@ -16,6 +16,8 @@ const addComments = async (req, res) => {
 
     const userId = req.user.userId;
 
+    const matchedUser = await User.findById(userId);
+
     //throw error is post not found
 
     if (!matchedPost) {
@@ -32,6 +34,7 @@ const addComments = async (req, res) => {
       comment,
       post: matchedPost._id,
       user: userId,
+      name: matchedUser.name,
     });
 
     //saving comments to database

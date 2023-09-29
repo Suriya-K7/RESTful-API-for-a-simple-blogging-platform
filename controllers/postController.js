@@ -49,11 +49,35 @@ const getAllPosts = async (req, res) => {
   try {
     // getting all post
 
-    const post = await Post.find();
+    const post = await Post.find().populate("comments").populate("user");
 
     // sending all post to front end
 
     res.status(200).json(post);
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+};
+
+/***************read post data*******************/
+
+const getOnePost = async (req, res) => {
+  try {
+    //getting post id using params
+
+    const { postid } = req.params;
+
+    //getting matched post
+
+    const matchedPost = await Post.findById(postid).populate("comments");
+
+    //throw error if post not found
+
+    if (!matchedPost) {
+      return res.status(404).json({ message: "post not found" });
+    }
+
+    res.status(200).json(matchedPost);
   } catch (error) {
     return res.status(404).json({ message: error.message });
   }
@@ -71,6 +95,8 @@ const editPost = async (req, res) => {
 
     const matchedPost = await Post.findById(postid);
 
+    console.log(1);
+
     //throw error if post not found
 
     if (!matchedPost) {
@@ -82,6 +108,8 @@ const editPost = async (req, res) => {
     const userId = req.user.userId;
 
     //throw error if user is not authorized
+
+    console.log(2);
 
     if (matchedPost.userId !== userId) {
       return res
@@ -150,4 +178,5 @@ module.exports = {
   getAllPosts,
   editPost,
   deletePost,
+  getOnePost,
 };
