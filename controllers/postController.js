@@ -95,8 +95,6 @@ const editPost = async (req, res) => {
 
     const matchedPost = await Post.findById(postid);
 
-    console.log(1);
-
     //throw error if post not found
 
     if (!matchedPost) {
@@ -108,8 +106,6 @@ const editPost = async (req, res) => {
     const userId = req.user.userId;
 
     //throw error if user is not authorized
-
-    console.log(2);
 
     if (matchedPost.userId !== userId) {
       return res
